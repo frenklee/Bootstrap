@@ -37,6 +37,7 @@ public class AdminController {
         model.addAttribute("allRoles", roles);
         return "admin";
     }
+
     @GetMapping("/{id}")
     public String getUser(@PathVariable(name = "id") int id, Model model){
         model.addAttribute("user",userService.getUser(id));
@@ -49,20 +50,10 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/createForm")
-    public String createForm(Model model){
-        model.addAttribute("user", new User());
-        return "createUser";
-    }
     @PostMapping()
     public String createUser(@ModelAttribute("user") User user){
         userService.addUser(user);
         return "redirect:/admin";
-    }
-    @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id){
-        model.addAttribute("user",userService.getUser(id));
-        return "edit";
     }
 
     @PatchMapping("/{id}")

@@ -52,6 +52,7 @@ public class UserServiceImp implements UserService {
             roles.add(roleDAO.getRoleById(2));
         }
         user.setRoles(roles);
+        user.setPassword(passwordEncoder.encode((user.getPassword())));
         userDAO.updateUser(user);
     }
 
@@ -90,6 +91,7 @@ public class UserServiceImp implements UserService {
             Role role2 = new Role("ROLE_USER");
             Set<Role> roles = new HashSet<>();
             roles.add(role1);
+            roles.add(role2);
             admin.setRoles(roles);
             roleDAO.addRole(role1);
             roleDAO.addRole(role2);
