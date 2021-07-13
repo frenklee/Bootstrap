@@ -32,13 +32,13 @@ public class UserServiceImp implements UserService {
     public UserServiceImp(){}
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<User> listUsers() {
         return userDAO.listUsers();
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public User getUser(int id) {
         return userDAO.getUser(id);
     }
