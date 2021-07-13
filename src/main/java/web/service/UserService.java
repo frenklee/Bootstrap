@@ -1,5 +1,6 @@
 package web.service;
 
+import web.model.Role;
 import web.model.User;
 
 import java.util.List;
@@ -12,5 +13,5 @@ public interface UserService{
     public void addUser(User user);
     public User getUserByLogin(String name);
     public void addInitData();
-
+    public Role showRole(int id);
 }

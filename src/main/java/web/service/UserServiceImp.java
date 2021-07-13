@@ -12,6 +12,7 @@ import web.model.User;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -45,13 +46,12 @@ public class UserServiceImp implements UserService {
     @Override
     @Transactional
     public void updateUser(int id, User user) {
-        Set<Role> roles = new HashSet<>();
-        if(user.getId() == 1){
-            roles.add(roleDAO.getRoleById(1));
-        } else {
-            roles.add(roleDAO.getRoleById(2));
+        Set<Role> rol1 = new HashSet<>();
+        for (Role role: user.getRoles()) {
+
+            rol1.add(roleDAO.getRoleById(Integer.parseInt(role.getName())));
         }
-        user.setRoles(roles);
+        user.setRoles(rol1);
         user.setPassword(passwordEncoder.encode((user.getPassword())));
         userDAO.updateUser(user);
     }
@@ -63,12 +63,22 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public Role showRole(int id) {
+        Role role = roleDAO.getRoleById(id);
+
+        return role;
+    }
+
+    @Override
     @Transactional
     public void addUser(User user) {
+        Set<Role> rol = new HashSet<>();
+        for (Role role: user.getRoles()) {
+
+            rol.add(roleDAO.getRoleById(Integer.parseInt(role.getName())));
+        }
+        user.setRoles(rol);
         user.setPassword(passwordEncoder.encode((user.getPassword())));
-        Set<Role> roles = new HashSet<>();
-        roles.add(roleDAO.getRoleById(2));
-        user.setRoles(roles);
         userDAO.addUser(user);
     }
 
