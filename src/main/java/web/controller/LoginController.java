@@ -10,8 +10,12 @@ import javax.annotation.PostConstruct;
 @Controller
 public class LoginController {
 
+    private final UserService userService;
+
     @Autowired
-    UserService userService;
+    public LoginController(UserService userService){
+        this.userService=userService;
+    }
 
     @PostConstruct
     public void init(){

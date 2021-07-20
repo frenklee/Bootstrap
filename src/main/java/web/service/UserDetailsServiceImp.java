@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserDetailsServiceImp implements UserDetailsService {
 
-    UserDAO userDAO;
+    private final UserDAO userDAO;
 
     @Autowired
     public UserDetailsServiceImp(UserDAO userDAO){
